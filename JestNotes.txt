@@ -1,0 +1,19 @@
+-must import components and functions into test file
+- store test files within src, usually in component's folder
+- name test file after component with .test.js
+    Profile.js
+    Profile.test.js
+-unit test: smallest unit of code like a single function. These test should be done in isolation and can be accomplished using separate containers like it() or test(). Functionally both are the same
+    it() takes 3 arguments: a string, a callback function for assertions, and an optional timeout (defaults to 5000ms)
+    each it() is a separate entry within the test suite
+        it('takes an array of numbers and returns an arary of those numbers reversed', ()=>{}, 10000);
+-make assertions with the expect() function that typically uses matcher functions such as .toBe() or .not() or .toEqual()
+    expect(2+2).toBe(4);
+-Follow the AAA pattern: Arrange, Act, Assert
+    Arrange: set up the variables and conditions for the test
+        const inputArray = [1,2,3]
+        const expectedValve = [3,2,1]
+    Act: invoke the functionality that we want to test, pass the input variable into the function and store the result.
+        const actualValue = reverseArray(inputArray);
+    Assert: check if the code produced the expected result using expect() and matcher methods. Multiple expects() can be used in a single it(). In order for test to pass all assertions must pass.
+        expect(actualValue).toEqual(expectedValve);

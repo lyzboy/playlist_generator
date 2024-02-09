@@ -1,3 +1,13 @@
-// create a jest test to check if the search bar is created
-// and if the search bar is empty
-test("SearchBar is created and empty", () => {});
+import React from "react";
+import SearchBar from "./SearchBar";
+import { render } from "@testing-library/react";
+
+it("Checks if the search bar component is rendered", () => {
+    //Arrange
+
+    //Act
+    const { container } = render(<SearchBar />);
+
+    //Assert
+    expect(container.firstChild).toBeTruthy();
+});
