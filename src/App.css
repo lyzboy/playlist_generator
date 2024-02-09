@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+/**
+ * FILEPATH: /d:/Programming/Web_Dev/React/playlist_generator/src/App.css
+ * 
+ * This CSS file contains styles for the App component in a React playlist generator application.
+ * It imports fonts from Google Fonts and sets global styles for the application.
+ * The font families used are "Raleway" for the HTML element and "Noto Sans" for headings.
+ * The heading styles are defined for h1, h2, h3, h4, and h5 elements.
+ * This file is will determine css resets and base styles for the application.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&family=Raleway:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+    font-size: 62.5%;
+    font-family: "Raleway", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Noto Sans", sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+    font-size: 3.6rem;
+    font-weight: 500;
 }
 
-.App-link {
-  color: #61dafb;
+h2 {
+    font-size: 3rem;
+    font-weight: 500;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h3 {
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.8rem;
+    font-weight: 500;
 }
