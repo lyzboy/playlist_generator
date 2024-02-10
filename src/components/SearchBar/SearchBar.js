@@ -8,16 +8,15 @@ export default function SearchBar({ setSearchValue, handleSearch }) {
         handleSearch();
     }
     return (
-        <div className={styles.searchBar}>
-            <form onSubmit={handleSubmit}>
-                <input
+
+            <form onSubmit={handleSubmit} className={styles.searchBar}>
+                <input className={styles.searchInput}
                     type="text"
                     name="song-input"
                     placeholder="Enter song title"
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <button>Search</button>
+                <button className={styles.searchButton}>Search</button>
             </form>
-        </div>
     );
 }
