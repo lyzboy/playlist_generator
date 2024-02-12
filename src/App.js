@@ -10,17 +10,17 @@ const results = [
     {
         name: "Name 1",
         artist: "Artist 1",
-        alumn: "Album 1",
+        album: "Album 1",
     },
     {
         name: "Name 2",
         artist: "Artist 2",
-        alumn: "Album 2",
+        album: "Album 2",
     },
     {
         name: "Name 3",
         artist: "Artist 3",
-        alumn: "Album 3",
+        album: "Album 3",
     },
 ];
 
