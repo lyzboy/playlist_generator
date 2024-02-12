@@ -1,13 +1,77 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/**
+ * FILEPATH: /d:/Programming/Web_Dev/React/playlist_generator/src/App.css
+ * 
+ * This CSS file contains styles for the App component in a React playlist generator application.
+ * It imports fonts from Google Fonts and sets global styles for the application.
+ * The font families used are "Raleway" for the HTML element and "Noto Sans" for headings.
+ * The heading styles are defined for h1, h2, h3, h4, and h5 elements.
+ * This file is will determine css resets and base styles for the application.
+ */
+ @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&family=Raleway:wght@300&display=swap");
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+ 
+ html {
+     font-size: 62.5%;
+     font-family: "Raleway", sans-serif;
+ }
+ 
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+     font-family: "Noto Sans", sans-serif;
+ }
+ 
+ h1 {
+     font-size: 3.6rem;
+     font-weight: 500;
+ }
+ 
+ h2 {
+     font-size: 3rem;
+     font-weight: 500;
+ }
+ 
+ h3 {
+     font-size: 2.4rem;
+     font-weight: 500;
+ }
+ 
+ h4 {
+     font-size: 2rem;
+     font-weight: 500;
+ }
+ 
+ h5 {
+     font-size: 1.8rem;
+     font-weight: 500;
+ }
+ 
+ body {
+     background: linear-gradient(#15cc8f, #351190);
+     height: 100vh;
+     padding: 0 10rem;
+ }
+ 
+ #title {
+     text-align: center;
+     margin-top: 5rem;
+     margin-bottom: 5rem;
+     color: #fff;
+ }
+
+ #root {
+  width: 100%;
+ }
+
+ .App {
+  width: 100%;
+  text-align: center;
+ }

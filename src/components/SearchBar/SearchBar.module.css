@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-bottom: 5rem;
 }
 
 .searchInput {
@@ -29,3 +30,12 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.searchButton:hover {
+    background-color: #7346f0;
+}
+
+.searchButton:active {
+    background-color: #3e2486;
+}
+

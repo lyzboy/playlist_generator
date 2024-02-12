@@ -1,0 +1,16 @@
+.searchResults_header {
+    color: white;
+    text-align: center;
+}
+
+.searchResults{
+    background-color: rgba(0,0,0,.2);
+    flex:1;
+    margin: 0 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
