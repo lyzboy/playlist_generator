@@ -1,16 +1,14 @@
-Create Static Components
-Create components for your Jammming application. You may structure your components as you see fit, but you should have a component representing each of these core components of the interface:
+Obtain a Spotify Access Token
+To use the Spotify API with Jammming, you need to get a user’s Spotify access token to make Spotify API requests.
 
-App x
-SearchBar x
-SearchResults x
-Playlist x
-Tracklist 
-Track x
-Additionally, make sure that your interface has a Save To Spotify button and a Search button.
+Create a JavaScript module that will handle the logic for getting an access token and using it to make requests. The method should have a way to get a user’s access token and store it.
 
-For now, these components should be static and may contain mock data. At this point, you should focus on how your components will interact with the data rather than on how they will retrieve data from APIs (that comes in a later task). Remember to build reusable components and keep them small.
+You can use the Implicit Grant Flow to set up a user’s account and make requests. The implicit grant flow returns a user’s token in the URL.
+From the URL, you should extract the access token values and set them up in your app. You should also set up a variable for the expiration time and configure the access token to expire at the appropriate time.
+Remember to clear parameters from the URL to avoid issues with expired access tokens.
+You may encounter errors if the access token is not in the URL. It can happen if the user has not logged in and granted your app access to their Spotify account yet. Handle these errors appropriately.
 
-Organizationally, don’t forget to keep your project tidy by creating a folder for each component and keeping your styles separate with a CSS module for each component.
 
-You’re also welcome to use any libraries to help you build features.
+https://developer.spotify.com/documentation/web-api/concepts/authorization
+
+https://developer.spotify.com/documentation/web-api/tutorials/implicit-flow
