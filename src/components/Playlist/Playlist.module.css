@@ -38,9 +38,11 @@
     border: none;
     color: white;
     font-style: inherit;
-    font-size: 3rem;
     padding: 0 1rem;
     border-bottom: solid 2px rgba(255, 255, 255, 0.4);
+    font-family: "Noto Sans", sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
 }
 
 .playlist_input::placeholder {

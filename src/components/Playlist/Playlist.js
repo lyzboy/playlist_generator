@@ -10,7 +10,7 @@ export default function Playlist({ playlist, handleRemoveFromPlaylist }) {
             <input
                 className={styles.playlist_input}
                 type="text"
-                placeholder="Playlist"
+                placeholder="Playlist Name"
             />
             <Tracklist
                 tracks={playlist}
