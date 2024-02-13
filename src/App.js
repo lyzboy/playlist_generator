@@ -40,7 +40,7 @@ function App() {
         if (!playlist.includes(track)) {
             setPlaylist((prev) => [track, ...prev]);
         }
-        setSearchResults(searchResults.filter((element) => element != track));
+        //setSearchResults(searchResults.filter((element) => element != track));
     }
 
     function handleRemoveFromPlaylist(track) {
