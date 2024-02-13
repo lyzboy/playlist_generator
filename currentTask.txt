@@ -1,12 +1,12 @@
 Create Static Components
 Create components for your Jammming application. You may structure your components as you see fit, but you should have a component representing each of these core components of the interface:
 
-App
-SearchBar
-SearchResults
-Playlist
-Tracklist
-Track
+App x
+SearchBar x
+SearchResults x
+Playlist x
+Tracklist 
+Track x
 Additionally, make sure that your interface has a Save To Spotify button and a Search button.
 
 For now, these components should be static and may contain mock data. At this point, you should focus on how your components will interact with the data rather than on how they will retrieve data from APIs (that comes in a later task). Remember to build reusable components and keep them small.
