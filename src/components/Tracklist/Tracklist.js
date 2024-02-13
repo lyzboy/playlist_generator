@@ -11,6 +11,7 @@ export default function Tracklist({ tracks, handlePlaylistManagement, add }) {
                 tracks.map((track) => {
                     return (
                         <Track
+                            key={track.id}
                             trackName={track.name}
                             artistName={track.artist}
                             albumName={track.album}
