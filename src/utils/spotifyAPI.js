@@ -14,15 +14,22 @@ let expireTime;
 
 const Spotify = {
     getToken() {
-        if (!token) {
+        if (expireTime < new Date().getTime() || !token) {
             window.location = url;
-            token = window.location.href.match(/acess_token=([^&]*)/);
+            token = window.location.href.match(/access_token=([^&]*)/)[1];
+            const timeToExpire =
+                window.location.href.match(/expires_in=([^&]*)/)[1];
+            console.log(`The token is: ${token}`);
+            console.log(`The time to expire is: ${timeToExpire}`);
+            expireTime = new Date().getTime() + Number(timeToExpire) * 1000;
+            return token;
+        } else {
+            return token;
         }
     },
 
     search(term) {
-        const returnUrl = this.getToken();
-        console.log(returnUrl);
+        const userToken = this.getToken();
     },
 };
 
