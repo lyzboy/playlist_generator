@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import SearchBar from "./components/SearchBar/SearchBar";
-import SearchResults from "./components/SearchResults/SearchResults";
-import Playlist from "./components/Playlist/Playlist";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResults from "../SearchResults/SearchResults";
+import Playlist from "../Playlist/Playlist";
 
 import styles from "./App.module.css";
+
+import Spotify from "../../utils/spotifyAPI";
 
 const results = [
     {
@@ -35,6 +37,7 @@ function App() {
 
     function handleSearch() {
         console.log(searchValue);
+        Spotify.search();
         setSearchResults(results);
         setSearchValue("");
     }
@@ -53,7 +56,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1 id="title">Jamming</h1>
+            <h1 id="title">Jammmin</h1>
             <SearchBar
                 setSearchValue={setSearchValue}
                 handleSearch={handleSearch}
