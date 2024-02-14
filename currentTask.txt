@@ -1,14 +1,16 @@
-Obtain a Spotify Access Token
-To use the Spotify API with Jammming, you need to get a user’s Spotify access token to make Spotify API requests.
+Implement Spotify Search Request
+Connect the search bar to Spotify so that it can query data from the Spotify API. Your implementation should enable users to enter a search parameter and receive a response from the Spotify API. You should display the results from the request to the user.
 
-Create a JavaScript module that will handle the logic for getting an access token and using it to make requests. The method should have a way to get a user’s access token and store it.
+To make your request to the API, use the /v1/search?type=TRACKendpoint. You can refer to the Spotify Web API Endpoint Reference for guidance on formatting your request.
 
-You can use the Implicit Grant Flow to set up a user’s account and make requests. The implicit grant flow returns a user’s token in the URL.
-From the URL, you should extract the access token values and set them up in your app. You should also set up a variable for the expiration time and configure the access token to expire at the appropriate time.
-Remember to clear parameters from the URL to avoid issues with expired access tokens.
-You may encounter errors if the access token is not in the URL. It can happen if the user has not logged in and granted your app access to their Spotify account yet. Handle these errors appropriately.
+You can use fetch() to make your GET requests and you should be expecting the response back as a list of tracks in JSON format.
 
+It is best to convert the JSON to an array of tracks, the array should be a list of track objects with the following properties: id, name, artist, album, and uri.
 
-https://developer.spotify.com/documentation/web-api/concepts/authorization
+Common errors to avoid:
 
-https://developer.spotify.com/documentation/web-api/tutorials/implicit-flow
+Invalid access tokens: Make sure that you use valid access tokens before making your requests.
+Incorrect API endpoint: Make sure you use /v1/search?type=TRACK as outlined in the documentation.
+Incorrectly formatted requests: Refer to the Endpoint Reference documentation for guidance on how to format your requests.
+
+https://developer.spotify.com/documentation/web-api
