@@ -11,9 +11,10 @@ url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
 
 let token;
 let expireTime;
-
 const Spotify = {
     getToken() {
+        expireTime = Number(localStorage.getItem("storedDate"));
+
         if (expireTime < new Date().getTime() || !token) {
             window.location = url;
             token = window.location.href.match(/access_token=([^&]*)/)[1];
@@ -21,7 +22,10 @@ const Spotify = {
                 window.location.href.match(/expires_in=([^&]*)/)[1];
             console.log(`The token is: ${token}`);
             console.log(`The time to expire is: ${timeToExpire}`);
+            // get the time to expire and store it to the browser
             expireTime = new Date().getTime() + Number(timeToExpire) * 1000;
+            let expireTimeString = expireTime.toString();
+            localStorage.setItem("storedDate", expireTimeString);
             return token;
         } else {
             return token;
