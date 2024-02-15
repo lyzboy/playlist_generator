@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
@@ -51,7 +51,7 @@ function App() {
 
     function handleRemoveFromPlaylist(track) {
         console.log(JSON.stringify(track));
-        setPlaylist(playlist.filter((element) => element != track));
+        setPlaylist(playlist.filter((element) => element !== track));
     }
 
     return (

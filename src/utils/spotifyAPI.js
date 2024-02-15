@@ -1,4 +1,5 @@
-var client_id = "7bd3a135912c46449b2387c6a65ec687";
+var client_id = process.env.REACT_APP_CLIENT_ID;
+
 var redirect_uri = "http://localhost:3000/";
 
 var scope = "user-read-private user-read-email";
@@ -9,31 +10,37 @@ url += "&client_id=" + encodeURIComponent(client_id);
 url += "&scope=" + encodeURIComponent(scope);
 url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
 
-let token;
-let expireTime;
 const Spotify = {
     getToken() {
-        expireTime = Number(localStorage.getItem("storedDate"));
+        // Retrieve the token and expiration time from localStorage
+        let token = localStorage.getItem("token");
+        let expireTime = Number(localStorage.getItem("expireTime"));
 
-        if (expireTime < new Date().getTime() || !token) {
+        // Check if the token is not set or if it has expired
+        if (!token || expireTime < new Date().getTime()) {
+            // If so, redirect to the authorization URL
             window.location = url;
+
+            // Extract the token and expiration time from the URL
             token = window.location.href.match(/access_token=([^&]*)/)[1];
-            const timeToExpire =
+            const expiresIn =
                 window.location.href.match(/expires_in=([^&]*)/)[1];
-            console.log(`The token is: ${token}`);
-            console.log(`The time to expire is: ${timeToExpire}`);
-            // get the time to expire and store it to the browser
-            expireTime = new Date().getTime() + Number(timeToExpire) * 1000;
-            let expireTimeString = expireTime.toString();
-            localStorage.setItem("storedDate", expireTimeString);
-            return token;
-        } else {
-            return token;
+
+            // Calculate the expiration time and store it in localStorage
+            expireTime = new Date().getTime() + Number(expiresIn) * 1000;
+            localStorage.setItem("expireTime", expireTime.toString());
+
+            // Store the token in localStorage
+            localStorage.setItem("token", token);
         }
+
+        // Return the token
+        return token;
     },
 
     search(term) {
         const userToken = this.getToken();
+        // Continue with search implementation
     },
 };
 
