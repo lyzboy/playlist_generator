@@ -41,6 +41,29 @@ const Spotify = {
     search(term) {
         const userToken = this.getToken();
         // Continue with search implementation
+        const searchTracks = async (query) => {
+            const response = await fetch(
+                `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+                    query
+                )}&type=track`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN}`,
+                    },
+                }
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.tracks.items; // This is an array of track objects
+            } else {
+                console.error(`API request failed: ${response.status}`);
+                return [];
+            }
+        };
+
+        // Usage:
+        searchTracks("Beatles").then((tracks) => console.log(tracks));
     },
 };
 
