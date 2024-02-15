@@ -8,26 +8,26 @@ import styles from "./App.module.css";
 
 import Spotify from "../../utils/spotifyAPI";
 
-const results = [
-    {
-        id: 1,
-        name: "Name 1",
-        artist: "Artist 1",
-        album: "Album 1",
-    },
-    {
-        id: 2,
-        name: "Name 2",
-        artist: "Artist 2",
-        album: "Album 2",
-    },
-    {
-        id: 3,
-        name: "Name 3",
-        artist: "Artist 3",
-        album: "Album 3",
-    },
-];
+// const results = [
+//     {
+//         id: 1,
+//         name: "Name 1",
+//         artist: "Artist 1",
+//         album: "Album 1",
+//     },
+//     {
+//         id: 2,
+//         name: "Name 2",
+//         artist: "Artist 2",
+//         album: "Album 2",
+//     },
+//     {
+//         id: 3,
+//         name: "Name 3",
+//         artist: "Artist 3",
+//         album: "Album 3",
+//     },
+// ];
 
 function App() {
     const [searchValue, setSearchValue] = useState("");
@@ -35,12 +35,11 @@ function App() {
     const [playlist, setPlaylist] = useState([]);
     const [playlistName, setPlaylistName] = useState("New Playlist");
 
-    function handleSearch() {
-        console.log(searchValue);
-        Spotify.search();
+    const handleSearch = async () => {
+        const results = await Spotify.search(searchValue);
         setSearchResults(results);
         setSearchValue("");
-    }
+    };
 
     function handleAddToPlaylist(track) {
         console.log(JSON.stringify(track));

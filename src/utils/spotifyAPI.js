@@ -38,32 +38,25 @@ const Spotify = {
         return token;
     },
 
-    search(term) {
-        const userToken = this.getToken();
-        // Continue with search implementation
-        const searchTracks = async (query) => {
-            const response = await fetch(
-                `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-                    query
-                )}&type=track`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN}`,
-                    },
-                }
-            );
+    async search(term) {
+        try {
+            const userToken = this.getToken();
+            const baseUrl = "https://api.spotify.com/v1/tracks";
+            const searchUrl = encodeURIComponent(`${baseUrl}q=track:${term}`);
+            // Continue with search implementation
+            const response = await fetch(searchUrl, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`,
+                },
+            });
 
-            if (response.ok) {
-                const data = await response.json();
-                return data.tracks.items; // This is an array of track objects
-            } else {
-                console.error(`API request failed: ${response.status}`);
-                return [];
-            }
-        };
+            const data = await response.json();
+            console.log(data);
 
-        // Usage:
-        searchTracks("Beatles").then((tracks) => console.log(tracks));
+            return data;
+        } catch (error) {
+            console.log(`There was an error when searching: ${error}`);
+        }
     },
 };
 
