@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
@@ -8,37 +8,22 @@ import styles from "./App.module.css";
 
 import Spotify from "../../utils/spotifyAPI";
 
-// const results = [
-//     {
-//         id: 1,
-//         name: "Name 1",
-//         artist: "Artist 1",
-//         album: "Album 1",
-//     },
-//     {
-//         id: 2,
-//         name: "Name 2",
-//         artist: "Artist 2",
-//         album: "Album 2",
-//     },
-//     {
-//         id: 3,
-//         name: "Name 3",
-//         artist: "Artist 3",
-//         album: "Album 3",
-//     },
-// ];
-
 function App() {
     const [searchValue, setSearchValue] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [playlist, setPlaylist] = useState([]);
     const [playlistName, setPlaylistName] = useState("New Playlist");
 
+
     const handleSearch = async () => {
-        const results = await Spotify.search(searchValue);
-        setSearchResults(results);
-        setSearchValue("");
+        try {
+            const results = await Spotify.search(searchValue);
+            console.log(results)
+            setSearchResults(results);
+            setSearchValue("");
+        } catch (error) {
+            console.log(`There was an error in App.js handleSearch: ${error}`);
+        }
     };
 
     function handleAddToPlaylist(track) {
@@ -59,6 +44,7 @@ function App() {
             <SearchBar
                 setSearchValue={setSearchValue}
                 handleSearch={handleSearch}
+                searchValue={searchValue}
             />
             <div className={styles.app_results}>
                 <SearchResults

@@ -1,7 +1,7 @@
 Implement Spotify Search Request
 Connect the search bar to Spotify so that it can query data from the Spotify API. Your implementation should enable users to enter a search parameter and receive a response from the Spotify API. You should display the results from the request to the user.
 
-To make your request to the API, use the /v1/search?type=TRACKendpoint. You can refer to the Spotify Web API Endpoint Reference for guidance on formatting your request.
+To make your request to the API, use the /v1/search?type=TRACK endpoint. You can refer to the Spotify Web API Endpoint Reference for guidance on formatting your request.
 
 You can use fetch() to make your GET requests and you should be expecting the response back as a list of tracks in JSON format.
 
