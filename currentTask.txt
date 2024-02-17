@@ -1,16 +1,16 @@
-Create Static Components
-Create components for your Jammming application. You may structure your components as you see fit, but you should have a component representing each of these core components of the interface:
+Implement Spotify Search Request
+Connect the search bar to Spotify so that it can query data from the Spotify API. Your implementation should enable users to enter a search parameter and receive a response from the Spotify API. You should display the results from the request to the user.
 
-App x
-SearchBar x
-SearchResults x
-Playlist x
-Tracklist 
-Track x
-Additionally, make sure that your interface has a Save To Spotify button and a Search button.
+To make your request to the API, use the /v1/search?type=TRACK endpoint. You can refer to the Spotify Web API Endpoint Reference for guidance on formatting your request.
 
-For now, these components should be static and may contain mock data. At this point, you should focus on how your components will interact with the data rather than on how they will retrieve data from APIs (that comes in a later task). Remember to build reusable components and keep them small.
+You can use fetch() to make your GET requests and you should be expecting the response back as a list of tracks in JSON format.
 
-Organizationally, don’t forget to keep your project tidy by creating a folder for each component and keeping your styles separate with a CSS module for each component.
+It is best to convert the JSON to an array of tracks, the array should be a list of track objects with the following properties: id, name, artist, album, and uri.
 
-You’re also welcome to use any libraries to help you build features.
+Common errors to avoid:
+
+Invalid access tokens: Make sure that you use valid access tokens before making your requests.
+Incorrect API endpoint: Make sure you use /v1/search?type=TRACK as outlined in the documentation.
+Incorrectly formatted requests: Refer to the Endpoint Reference documentation for guidance on how to format your requests.
+
+https://developer.spotify.com/documentation/web-api

@@ -13,6 +13,7 @@ export default function SearchResults({ searchResults, handleAddToPlaylist }) {
                 handlePlaylistManagement={handleAddToPlaylist}
                 add={true}
             />
+            
         </div>
     );
 }
