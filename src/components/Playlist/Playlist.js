@@ -9,6 +9,7 @@ export default function Playlist({
     handleRemoveFromPlaylist,
     playlistName,
     setPlaylistName,
+    handleSavePlaylist,
 }) {
     return (
         <div className={styles.playlist}>
@@ -23,7 +24,12 @@ export default function Playlist({
                 handlePlaylistManagement={handleRemoveFromPlaylist}
                 add={false}
             />
-            <button className={styles.playlistButton}>Save to Spotify</button>
+            <button
+                onClick={handleSavePlaylist}
+                className={styles.playlistButton}
+            >
+                Save to Spotify
+            </button>
         </div>
     );
 }

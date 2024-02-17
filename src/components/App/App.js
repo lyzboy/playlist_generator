@@ -14,11 +14,9 @@ function App() {
     const [playlist, setPlaylist] = useState([]);
     const [playlistName, setPlaylistName] = useState("New Playlist");
 
-
     const handleSearch = async () => {
         try {
             const results = await Spotify.search(searchValue);
-            console.log(results)
             setSearchResults(results);
             setSearchValue("");
         } catch (error) {
@@ -27,7 +25,6 @@ function App() {
     };
 
     function handleAddToPlaylist(track) {
-        console.log(JSON.stringify(track));
         if (!playlist.includes(track)) {
             setPlaylist((prev) => [track, ...prev]);
         }
@@ -37,6 +34,15 @@ function App() {
         console.log(JSON.stringify(track));
         setPlaylist(playlist.filter((element) => element !== track));
     }
+
+    const handleSavePlaylist = async () => {
+        try {
+            await Spotify.generatePlaylistData(playlist, playlistName);
+            setPlaylist([]);
+        } catch (error) {
+            console.error(`Error handling save playlist: ${error}`);
+        }
+    };
 
     return (
         <div className="App">
@@ -56,6 +62,7 @@ function App() {
                     handleRemoveFromPlaylist={handleRemoveFromPlaylist}
                     playlistName={playlistName}
                     setPlaylistName={setPlaylistName}
+                    handleSavePlaylist={handleSavePlaylist}
                 />
             </div>
         </div>

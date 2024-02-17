@@ -41,32 +41,74 @@ const Spotify = {
         try {
             const userToken = await this.getToken();
             const baseUrl = "https://api.spotify.com/v1/search?";
-            const searchUrl = `${baseUrl}q=${encodeURIComponent(term)}&type=track`;
+            const searchUrl = `${baseUrl}q=${encodeURIComponent(
+                term
+            )}&type=track`;
             // Continue with search implementation
             const response = await fetch(searchUrl, {
                 headers: {
                     Authorization: `Bearer ${userToken}`,
                 },
             });
-
-            const data = await response.json();
-            const items = data.tracks.items;
-            console.log(items);
-            const finalArray = [];
-            for(let item of items){
-                let track = {};
-                track.name = item.name;
-                track.id = item.id;
-                track.album=item.album.name;
-                track.artist=item.artists[0].name;
-                finalArray.push(track);
+            if (response.status === 200) {
+                const data = await response.json();
+                const items = data.tracks.items;
+                console.log(items);
+                const finalArray = [];
+                for (let item of items) {
+                    let track = {};
+                    track.name = item.name;
+                    track.id = item.id;
+                    track.album = item.album.name;
+                    track.artist = item.artists[0].name;
+                    finalArray.push(track);
+                }
+                return finalArray;
+            } else {
+                console.error(`Status ${response.status}: ${response.message}`);
+                return [];
             }
-            return finalArray;
         } catch (error) {
             console.log(`There was an error when searching: ${error}`);
             return [];
         }
     },
+
+    async handleCreateNewPlaylist(tracks, playlistName) {
+        try {
+            const playlistObject = await this.generatePlaylistData(
+                tracks,
+                playlistName
+            );
+            const userId = await this.getUserId();
+            const playlistId = await this.createNewPlaylist(
+                userId,
+                playlistObject.name
+            );
+            await this.addTracksToPlaylist(playlistObject.trackURIs);
+        } catch (error) {
+            console.error(`Error creating playlist: ${error}`);
+        }
+    },
+
+    async generatePlaylistData(tracks, playlistName) {
+        try {
+            const trackURIs = [];
+            console.log(tracks);
+            for (let track of tracks) {
+                trackURIs.push(`spotify:track:${encodeURI(track.id)}`);
+            }
+            return { name: playlistName, trackURIs: trackURIs };
+        } catch (error) {
+            console.error(`Error saving tracks to playlist: ${error}`);
+        }
+    },
+
+    async createNewPlaylist() {},
+
+    async getUserId() {},
+
+    async addTracksToPlaylist() {},
 };
 
 export default Spotify;
