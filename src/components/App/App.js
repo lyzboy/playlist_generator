@@ -14,6 +14,10 @@ function App() {
     const [playlist, setPlaylist] = useState([]);
     const [playlistName, setPlaylistName] = useState("New Playlist");
 
+    useEffect(()=>{
+        Spotify.getToken();
+    },[]);
+
     const handleSearch = async () => {
         try {
             const results = await Spotify.search(searchValue);
