@@ -1,18 +1,9 @@
 # Jamming
 
-In this project, you will build a React web application called Jammming. You will use your knowledge of React components, passing state, and requests with the Spotify API to build a website that allows users to search the Spotify library, create a custom playlist, then save it to their Spotify account.
+This was a project created for a codecademy project. In order to use it on your local enviornment, you will need to sign up for a spotify developer account and create a new app in the dashboard. Once you have recieved a client-id, be sure to create and .env file in you root folder of the app and add the line:
 
-## Project Requirements
+REACT_APP_CLIENT_ID={YOUR CLIENT ID HERE}
 
--   Build a web app using React
--   Version control your application with Git and host the repository on GitHub
--   Integrate with Spotify or another API
--   Deploy your application
--   Write a README (using Markdown) that documents your project, including:
-    -   The purpose of your project
-    -   Technologies used
-    -   Features
-    -   Future work
 
 ## Features:
 
