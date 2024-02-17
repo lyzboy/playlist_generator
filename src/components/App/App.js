@@ -37,7 +37,7 @@ function App() {
 
     const handleSavePlaylist = async () => {
         try {
-            await Spotify.generatePlaylistData(playlist, playlistName);
+            await Spotify.handleCreateNewPlaylist(playlist, playlistName);
             setPlaylist([]);
         } catch (error) {
             console.error(`Error handling save playlist: ${error}`);
