@@ -15,6 +15,7 @@ export default function Tracklist({ tracks, handlePlaylistManagement, add }) {
                             trackName={track.name}
                             artistName={track.artist}
                             albumName={track.album}
+                            trackPreview={track.previewUrl}
                             handleClick={() => handlePlaylistManagement(track)}
                             add={add}
                         />

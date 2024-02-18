@@ -65,6 +65,7 @@ const Spotify = {
                     track.id = item.id;
                     track.album = item.album.name;
                     track.artist = item.artists[0].name;
+                    track.previewUrl = item.preview_url;
                     finalArray.push(track);
                 }
                 return finalArray;
