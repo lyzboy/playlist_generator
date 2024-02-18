@@ -1,0 +1,11 @@
+.playButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
+}
+
+.playButton:hover {
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.2);
+}
