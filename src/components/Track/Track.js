@@ -10,6 +10,7 @@ export default function Track({
     albumName,
     handleClick,
     add,
+    trackPreview
 }) {
     return (
         <div className={styles.track}>
@@ -27,7 +28,7 @@ export default function Track({
                     <p className={`${styles.trackInfo_details}`}>{albumName}</p>
                 </div>
             </div>
-            <PlayButton />
+            <PlayButton trackPreview={trackPreview}/>
             <button
                 onClick={() => {
                     handleClick();
