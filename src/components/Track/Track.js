@@ -2,6 +2,8 @@ import React from "react";
 
 import styles from "./Track.module.css";
 
+import PlayButton from "../PlayButton/PlayButton";
+
 export default function Track({
     trackName,
     artistName,
@@ -25,6 +27,7 @@ export default function Track({
                     <p className={`${styles.trackInfo_details}`}>{albumName}</p>
                 </div>
             </div>
+            <PlayButton />
             <button
                 onClick={() => {
                     handleClick();
