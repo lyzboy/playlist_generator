@@ -1,6 +1,36 @@
-
-
 .app_results {
     display: flex;
     width: 100%;
+}
+
+dialog {
+    position: absolute;
+    left: 33.33%;
+    width: 33.33%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-color: #5928df;
+
+    p {
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+        padding: 2rem;
+    }
+
+    button {
+        border-radius: 5px;
+        border: none;
+        height: 2.6rem;
+        padding: 4px;
+        margin: 2rem 0;
+        min-width: 20rem;
+        max-width: 30rem;
+        background-color: #5928df;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }

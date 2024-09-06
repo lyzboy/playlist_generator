@@ -13,11 +13,18 @@ export default function Playlist({
     handleSavePlaylist,
 }) {
     const [hidden, setHidden] = useState(true);
-    const validatePlaylistName = () => {
-        if (playlistName === "New Playlist") {
-            setHidden(false);
-        } else {
-            setHidden(true);
+    const validatePlaylistName = async () => {
+        try {
+            if (playlistName === "New Playlist") {
+                setHidden(false);
+                await setTimeout(() => {
+                    setHidden(true);
+                }, 5000);
+            } else {
+                setHidden(true);
+            }
+        } catch (err) {
+            console.log(err);
         }
     };
 

@@ -17,6 +17,7 @@ function App() {
     const [playlist, setPlaylist] = useState([]);
     const [playlistName, setPlaylistName] = useState("New Playlist");
     const [currentTrackPlaying, setCurrentTrackPlaying] = useState(null);
+    const [playlistCreated, setPlaylistCreated] = useState(false);
     const audio = useRef(null);
 
     useEffect(() => {
@@ -32,6 +33,10 @@ function App() {
         Spotify.getToken();
     }, []);
 
+    const handlePlaylistCreationNotify = () => {
+        setPlaylistCreated(false);
+    };
+
     const handleSearch = async () => {
         try {
             const results = await Spotify.search(searchValue);
@@ -46,6 +51,9 @@ function App() {
         if (!playlist.includes(track)) {
             setPlaylist((prev) => [track, ...prev]);
         }
+        if (searchResults.includes(track)) {
+            setSearchResults(searchResults.filter((elem) => elem !== track));
+        }
     }
 
     function handleRemoveFromPlaylist(track) {
@@ -57,6 +65,8 @@ function App() {
             if (playlist.length > 0) {
                 await Spotify.handleCreateNewPlaylist(playlist, playlistName);
                 setPlaylist([]);
+                setPlaylistCreated(true);
+                setSearchResults([]);
             }
         } catch (error) {
             console.error(`Error handling save playlist: ${error}`);
@@ -89,6 +99,24 @@ function App() {
                         handleSearch={handleSearch}
                         searchValue={searchValue}
                     />
+                    {playlistCreated && (
+                        <dialog open>
+                            <p>
+                                You {playlistName} playlist has been created.
+                                Check your spotify profile to view your new
+                                playlist!
+                            </p>
+                            <form method="dialog">
+                                <button
+                                    onClick={() =>
+                                        handlePlaylistCreationNotify()
+                                    }
+                                >
+                                    OK
+                                </button>
+                            </form>
+                        </dialog>
+                    )}
                     <div className={styles.app_results}>
                         <SearchResults
                             searchResults={searchResults}
