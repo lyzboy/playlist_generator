@@ -67,6 +67,7 @@ function App() {
                 setPlaylist([]);
                 setPlaylistCreated(true);
                 setSearchResults([]);
+                setPlaylistName("New Playlist");
             }
         } catch (error) {
             console.error(`Error handling save playlist: ${error}`);
