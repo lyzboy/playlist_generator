@@ -4,7 +4,6 @@ This was a project created for a codecademy project. In order to use it on your 
 
 REACT_APP_CLIENT_ID={YOUR CLIENT ID HERE}
 
-
 ## Features:
 
 -   Users can search for songs by song title.
@@ -12,3 +11,13 @@ REACT_APP_CLIENT_ID={YOUR CLIENT ID HERE}
 -   Users can see information about each song like title, artist, and album for songs they queried
     -   You can also include other information – the design is up to you
 -   Users can export their custom playlist to their personal Spotify account
+
+## Installation
+
+To install this project. Run:
+
+`npm install`
+
+Once the node modules are installed, you can run the project with:
+
+`npm start`
