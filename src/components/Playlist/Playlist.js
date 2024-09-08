@@ -16,7 +16,7 @@ export default function Playlist({
     const [isBlinking, setIsBlinking] = useState(false);
 
     useEffect(() => {
-        setBlink(!blink);
+        setBlink(isBlinking);
     }, [isBlinking]);
 
     const validatePlaylistName = () => {

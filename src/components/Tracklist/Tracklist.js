@@ -2,11 +2,11 @@ import React from "react";
 
 import Track from "../Track/Track";
 
-//import styles from "./Tracklist.module.css";
+import styles from "./Tracklist.module.css";
 
 export default function Tracklist({ tracks, handlePlaylistManagement, add }) {
     return (
-        <>
+        <div className={styles.tracklist}>
             {tracks ? (
                 tracks.map((track) => {
                     return (
@@ -22,8 +22,8 @@ export default function Tracklist({ tracks, handlePlaylistManagement, add }) {
                     );
                 })
             ) : (
-                <p>Loading...</p>
+                <p>No Tracks Available</p>
             )}
-        </>
+        </div>
     );
 }
