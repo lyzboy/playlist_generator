@@ -1,5 +1,6 @@
 .app_results {
     display: flex;
+    flex-direction: row;
     width: 100%;
 }
 
@@ -32,5 +33,11 @@ dialog {
         color: white;
         font-weight: bold;
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app_results {
+        flex-direction: column;
     }
 }

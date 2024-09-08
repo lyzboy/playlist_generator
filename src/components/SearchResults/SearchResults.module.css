@@ -13,3 +13,9 @@
 
     padding-bottom: 2rem;
 }
+
+@media screen and (max-width: 768px) {
+    .searchResults {
+        margin-bottom: 1rem;
+    }
+}
