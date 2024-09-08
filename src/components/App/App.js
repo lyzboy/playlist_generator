@@ -82,6 +82,7 @@ function App() {
                 setPlaylistCreated(true);
                 setSearchResults([]);
                 setPlaylistName("New Playlist");
+                stopAllAudio();
             }
         } catch (error) {
             console.error(`Error handling save playlist: ${error}`);
