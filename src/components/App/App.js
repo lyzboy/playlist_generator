@@ -33,6 +33,15 @@ function App() {
         Spotify.getToken();
     }, []);
 
+    const stopAllAudio = () => {
+        const audioElements = document.querySelectorAll("audio");
+
+        audioElements.forEach((audio) => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    };
+
     const handlePlaylistCreationNotify = () => {
         setPlaylistCreated(false);
     };
@@ -54,10 +63,15 @@ function App() {
         if (searchResults.includes(track)) {
             setSearchResults(searchResults.filter((elem) => elem !== track));
         }
+        stopAllAudio();
     }
 
     function handleRemoveFromPlaylist(track) {
         setPlaylist(playlist.filter((element) => element !== track));
+        if (!searchResults.includes(track)) {
+            setSearchResults((prev) => [track, ...prev]);
+        }
+        stopAllAudio();
     }
 
     const handleSavePlaylist = async () => {
@@ -94,7 +108,7 @@ function App() {
         <PlayPreviewContext.Provider value={handlePlayPreview}>
             <PlayingTrackContext.Provider value={currentTrackPlaying}>
                 <div className="App">
-                    <h1 id="title">Jammmin</h1>
+                    <h1 id="title">Spotimix</h1>
                     <SearchBar
                         setSearchValue={setSearchValue}
                         handleSearch={handleSearch}
