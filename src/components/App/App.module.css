@@ -37,7 +37,14 @@ dialog {
 }
 
 @media screen and (max-width: 768px) {
+    .app {
+        width: 100%;
+    }
     .app_results {
         flex-direction: column;
+    }
+
+    dialog {
+        height: 25rem;
     }
 }
