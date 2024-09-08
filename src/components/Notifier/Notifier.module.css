@@ -1,16 +1,22 @@
-.notifier{
+.notifier {
     width: 20rem;
     height: auto;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 1rem;
     border-radius: 1rem;
     margin: 1rem auto;
     opacity: 100;
     transition: all 0.2s ease-in;
+    font-size: 1.6rem;
+    position: relative;
 }
 
 .hidden {
-    transform: scale(1,0);
+    transform: scale(1, 0);
     opacity: 0;
     overflow: hidden;
+}
+
+.absolute_position {
+    position: absolute;
 }

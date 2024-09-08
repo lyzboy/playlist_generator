@@ -25,7 +25,7 @@ export default function Playlist({
             handleBlink();
             setTimeout(() => {
                 setHidden(true);
-                stopBlinking(); // Stop blinking after 5 seconds
+                stopBlinking();
             }, 5000);
         } else {
             setHidden(true);
@@ -34,22 +34,19 @@ export default function Playlist({
     };
 
     const handleBlink = () => {
-        // Start blinking by setting up an interval
         if (!blinkingInterval) {
             const intervalId = setInterval(() => {
-                setIsBlinking((prev) => !prev); // Toggle blink every 500ms
-                console.log("blinking");
+                setIsBlinking((prev) => !prev);
             }, 500);
             setBlinkingInterval(intervalId);
         }
     };
 
     const stopBlinking = () => {
-        // Clear the blinking interval
         if (blinkingInterval) {
             clearInterval(blinkingInterval);
             setBlinkingInterval(null);
-            setIsBlinking(false); // Ensure the element returns to non-blinking state
+            setIsBlinking(false);
             setBlink(false);
         }
     };
