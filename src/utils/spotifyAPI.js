@@ -1,175 +1,180 @@
+import { generateCodeChallenge, generateCodeVerifier } from "./pkce";
+
+//var redirect_uri = "https://spotimix.netlify.app/";
+var redirect_uri = "http://localhost:3000/";
+
 const Spotify = {
-    async getToken() {
-        // Retrieve the token and expiration time from sessionStorage
-        let token = sessionStorage.getItem("token");
-        let expireTime = Number(sessionStorage.getItem("expireTime"));
+    // async getToken() {
+    //     // Retrieve the token and expiration time from sessionStorage
+    //     let token = sessionStorage.getItem("token");
+    //     let expireTime = Number(sessionStorage.getItem("expireTime"));
 
-        // Check if the token is not set or if it has expired
-        if (!token || expireTime < new Date().getTime()) {
-            var client_id = process.env.REACT_APP_CLIENT_ID;
+    //     // Check if the token is not set or if it has expired
+    //     if (!token || expireTime < new Date().getTime()) {
+    //         var client_id = process.env.REACT_APP_CLIENT_ID;
 
-            var redirect_uri = "https://spotimix.netlify.app/";
-            //var redirect_uri = "http://localhost:3000/";
+    //         var scope = "playlist-modify-public";
 
-            var scope = "playlist-modify-public";
+    //         var url = "https://accounts.spotify.com/authorize";
+    //         url += "?response_type=token";
+    //         url += "&client_id=" + client_id;
+    //         url += "&scope=" + encodeURIComponent(scope);
+    //         url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
 
-            var url = "https://accounts.spotify.com/authorize";
-            url += "?response_type=token";
-            url += "&client_id=" + client_id;
-            url += "&scope=" + encodeURIComponent(scope);
-            url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
+    //         // If so, redirect to the authorization URL
+    //         window.location = url;
 
-            // If so, redirect to the authorization URL
-            window.location = url;
+    //         // Extract the token and expiration time from the URL
+    //         token = window.location.href.match(/access_token=([^&]*)/)[1];
+    //         const expiresIn =
+    //             window.location.href.match(/expires_in=([^&]*)/)[1];
 
-            // Extract the token and expiration time from the URL
-            token = window.location.href.match(/access_token=([^&]*)/)[1];
-            const expiresIn =
-                window.location.href.match(/expires_in=([^&]*)/)[1];
+    //         // Calculate the expiration time and store it in sessionStorage
+    //         expireTime = new Date().getTime() + Number(expiresIn) * 1000;
+    //         sessionStorage.setItem("expireTime", expireTime.toString());
 
-            // Calculate the expiration time and store it in sessionStorage
-            expireTime = new Date().getTime() + Number(expiresIn) * 1000;
-            sessionStorage.setItem("expireTime", expireTime.toString());
+    //         // Store the token in sessionStorage
+    //         sessionStorage.setItem("token", token);
+    //     }
+    //     // Return the token
+    //     return token;
+    // },
 
-            // Store the token in sessionStorage
-            sessionStorage.setItem("token", token);
+    async getToken(){
+        const token = localStorage.getItem("access_token");
+        if(!token){
+            const params = new URLSearchParams(window.location.search);
+                const code = params.get("code");
+            const accessToken = await this.getAccessToken(code);
+            return accessToken;
+        } else {
+            return localStorage.getItem("access_token");
         }
-        // Return the token
-        return token;
     },
 
-    async search(term) {
-        // if token is not create, search doesn't happen
+    async verifyAuthentication() {
         try {
-            // get the token
-            const userToken = await this.getToken();
-            const baseUrl = "https://api.spotify.com/v1/search?";
-            const endpoint = `${baseUrl}q=${encodeURIComponent(
-                term
-            )}&type=track`;
-            // Continue with search implementation
-            const response = await fetch(endpoint, {
-                headers: {
-                    Authorization: `Bearer ${userToken}`,
-                },
-            });
-            if (response.ok) {
-                const data = await response.json();
-                // get correct data from response
-                const items = data.tracks.items;
-                // refactor returned objects into objects with needed data
-                const finalArray = [];
-                for (let item of items) {
-                    let track = {};
-                    track.name = item.name;
-                    track.id = item.id;
-                    track.album = item.album.name;
-                    track.artist = item.artists[0].name;
-                    track.previewUrl = item.preview_url;
-                    finalArray.push(track);
+            if(!localStorage.getItem("access_token")){
+                const params = new URLSearchParams(window.location.search);
+                const code = params.get("code");
+                if (!code) {
+                    this.redirectToAuthCodeFlow();
+                } else {
+                    const accessToken = await this.getAccessToken(code);
                 }
-                return finalArray;
             }
         } catch (error) {
-            console.log(`There was an error when searching: ${error}`);
-            return [];
+            console.log(error);
         }
     },
 
-    async handleCreateNewPlaylist(tracks, playlistName) {
+    checkExpireTime(expireTime) {
+        return expireTime < new Date().getTime();
+    },
+
+    async redirectToAuthCodeFlow() {
         try {
-            const token = await this.getToken();
-            const playlistObject = await this.generatePlaylistData(
-                tracks,
-                playlistName
-            );
-            const userId = await this.getUserId(token);
-            const playlistId = await this.createNewPlaylist(
-                token,
-                userId,
-                playlistObject.name
-            );
+            console.log("redirect to auth");
+            const refreshToken = localStorage.getItem("refresh_token");
+            const expireTime = localStorage.getItem("expireTime");
+            if (refreshToken || this.checkExpireTime(expireTime)) {
+                console.log("getting refresh token");
+                await this.getRefreshToken();
+            } else {
+                console.log("get auth code");
+                const verifier = generateCodeVerifier(128);
+                const challenge = await generateCodeChallenge(verifier);
 
-            await this.addTracksToPlaylist(
-                token,
-                playlistId,
-                playlistObject.trackURIs
-            );
-            console.log("playlist has been created.");
+                localStorage.setItem("verifier", verifier);
+
+                const params = new URLSearchParams();
+                params.append("client_id", process.env.REACT_APP_CLIENT_ID);
+                params.append("response_type", "code");
+                params.append("redirect_uri", redirect_uri);
+                params.append(
+                    "scope",
+                    "user-read-private user-read-email playlist-modify-public"
+                );
+                params.append("code_challenge_method", "S256");
+                params.append("code_challenge", challenge);
+
+                document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
+            }
         } catch (error) {
-            console.error(`Error handling playlist creation: ${error}`);
+            console.log(`Auth flow failure: ${error}`);
         }
     },
 
-    async generatePlaylistData(tracks, playlistName) {
-        const trackURIs = [];
-        for (let track of tracks) {
-            trackURIs.push(`spotify:track:${encodeURI(track.id)}`);
+    async getRefreshToken() {
+        try {
+            // refresh token that has been previously stored
+            const refreshToken = localStorage.getItem("refresh_token");
+            const url = "https://accounts.spotify.com/api/token";
+
+            const payload = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    grant_type: "refresh_token",
+                    refresh_token: refreshToken,
+                    client_id: process.env.REACT_APP_CLIENT_ID,
+                }),
+            };
+            const body = await fetch(url, payload);
+            const response = await body.json();
+
+            localStorage.setItem("access_token", response.accessToken);
+            if (response.refreshToken) {
+                localStorage.setItem("refresh_token", response.refreshToken);
+            }
+        } catch (error) {
+            console.log(`Unable to get refresh token: ${error}`);
         }
-        return { name: playlistName, trackURIs: trackURIs };
     },
 
-    async createNewPlaylist(userToken, userId, playlistName) {
-        const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${userToken}`,
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                name: playlistName,
-                description: "A playlist generated using the Jammmin app!",
-            }),
-        });
-        if (response.ok) {
-            const data = await response.json();
-            const playlistId = data.id;
-            console.log("You new playlist has been created!");
-            return playlistId;
-        } else {
-            throw new Error(
-                `Create New Playlist: Status ${response.status}: ${response.message}`
+    async getAccessToken(code) {
+        try {
+            // get verifier from local storage
+            const verifier = localStorage.getItem("verifier");
+
+            // create params needed for access token request
+            const params = new URLSearchParams();
+            params.append("client_id", process.env.REACT_APP_CLIENT_ID);
+            params.append("grant_type", "authorization_code");
+            params.append("code", code);
+            params.append("redirect_uri", redirect_uri);
+            params.append("code_verifier", verifier);
+
+            // make the POST request for the access token to the correct endpoint
+            const result = await fetch(
+                "https://accounts.spotify.com/api/token",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: params,
+                }
             );
-        }
-    },
+            if(result.ok){
+                const { access_token, refresh_token, expires_in } =
+                    await result.json();
+                if (refresh_token)
+                    localStorage.setItem("refresh_token", refresh_token);
 
-    async getUserId(userToken) {
-        const response = await fetch("https://api.spotify.com/v1/me", {
-            headers: {
-                Authorization: `Bearer ${userToken}`,
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            const user_id = data.id;
-            return user_id;
-        } else {
-            throw new Error(
-                `Get User ID: Status ${response.status}: ${response.message}`
-            );
-        }
-    },
+                // Calculate the expiration time and store it in localStorage
+                const expireTime = new Date().getTime() + Number(expires_in) * 1000;
+                localStorage.setItem("expireTime", expireTime.toString());
 
-    async addTracksToPlaylist(userToken, playlistId, trackURIs) {
-        const endpoint = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${userToken}`,
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                uris: trackURIs,
-                position: 0,
-            }),
-        });
-        if (response.ok) {
-            console.log("Tracks added to playlist");
-        } else {
-            throw new Error(
-                `Add Tracks To Playlist: Status ${response.status}: ${response.message}`
-            );
+                return access_token;
+            } else {
+                console.log(`There was an issue: ${result.status}`);
+                this.redirectToAuthCodeFlow();
+            }
+        } catch (error) {
+            console.log(`Unable to get access token: ${error}`);
         }
     },
 };
