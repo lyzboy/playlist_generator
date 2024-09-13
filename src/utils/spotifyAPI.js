@@ -14,17 +14,17 @@ Spotify.verifyAuthentication = async () => {
         // refresh token that has been previously stored
         const refreshToken = localStorage.getItem("refresh_token");
         if (refreshToken) {
-            this.getRefreshToken(refreshToken);
+            Spotify.getRefreshToken(refreshToken);
         } else {
             const params = new URLSearchParams(
                 window.location.search
             );
             const code = params.get("code");
             if (!code) {
-                this.redirectToAuthCodeFlow();
+                Spotify.redirectToAuthCodeFlow();
             } else {
                 const accessToken =
-                    await this.getAccessToken(code);
+                    await Spotify.getAccessToken(code);
                 localStorage.setItem(
                     "access_token",
                     accessToken
