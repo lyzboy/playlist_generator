@@ -52,12 +52,12 @@ The running project can be found [here](https://spotimix.netlify.app/).
    ```
 
 3. **Set up environment variables**:
-   Copy the `.env.example` file and rename it to `.env`. Then configure the following environment variables:
-
+   Copy the `.env.example` file and rename it to `.env`. 
    *Using bash:*
    ```bash
    cp .env.example .env
    ```
+Then configure the following environment variables:
 
    - `REACT_APP_CLIENT_ID` - Your Spotify client ID found within your Spotify Developer Dashboard.
 
