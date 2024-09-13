@@ -79,7 +79,7 @@ Spotify.getRefreshToken = async (refreshToken) => {
         };
         const body = await fetch(url, payload);
         const response = await body.json();
-        const {refresh_token, access_token, expires_in} = response;
+        const {refresh_token, access_token} = response;
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);                
     } catch (error) {
