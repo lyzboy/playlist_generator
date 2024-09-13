@@ -8,6 +8,8 @@ import styles from "./App.module.css";
 
 import Spotify from "../../utils/spotifyAPI";
 
+import routes from "../../utils/routes";
+
 const PlayPreviewContext = createContext(null);
 const PlayingTrackContext = createContext(null);
 
@@ -30,7 +32,7 @@ function App() {
     }, [currentTrackPlaying]);
 
     useEffect(() => {
-        Spotify.getToken();
+        Spotify.verifyAuthentication();
     }, []);
 
     const stopAllAudio = () => {
@@ -48,7 +50,7 @@ function App() {
 
     const handleSearch = async () => {
         try {
-            const results = await Spotify.search(searchValue);
+            const results = await routes.search(searchValue);
             setSearchResults(results);
             setSearchValue("");
         } catch (error) {
@@ -77,7 +79,7 @@ function App() {
     const handleSavePlaylist = async () => {
         try {
             if (playlist.length > 0) {
-                await Spotify.handleCreateNewPlaylist(playlist, playlistName);
+                await routes.handleCreateNewPlaylist(playlist, playlistName);
                 setPlaylist([]);
                 setPlaylistCreated(true);
                 setSearchResults([]);
