@@ -6,9 +6,6 @@ This is a server-less SPA that allows users to search for songs and create a cus
 
 The running project can be found [here](https://spotimix.netlify.app/).
 
-[![License](https://img.shields.io/github/license/lyzboy/playlist_generator.svg)](LICENSE)
-[![Build Status](https://img.shields.io/github/workflow/status/lyzboy/playlist_generator/CI)](
-
 [![Repo Size](https://img.shields.io/github/repo-size/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator)
 [![Contributors](https://img.shields.io/github/contributors/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator/graphs/contributors)
 
