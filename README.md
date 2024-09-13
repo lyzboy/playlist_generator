@@ -1,7 +1,7 @@
 
-# Project Title
+# Spotimix
 
-**Project Title Here**  
+**Spotimix**  
 This is a server-less SPA that allows users to search for songs and create a custom playlist that can be saved to their Spotify account. It is built using React and the Spotify API and use CI/CD to deploy to Netlify.
 
 The running project can be found [here](https://spotimix.netlify.app/).
@@ -24,8 +24,7 @@ The running project can be found [here](https://spotimix.netlify.app/).
 
 ## About
 
-> Brief overview of the project, what problems it solves, and its intended use.  
-Example: "This project aims to create a **modern eCommerce platform** that offers seamless integration with payment processors."
+> This project has been developed as a portfoli project to showcase the creation of an react app utilizing API authentication.
 
 ---
 
