@@ -32,7 +32,7 @@ The running project can be found [here](https://spotimix.netlify.app/).
 
 ### Prerequisites
 
-- List the software/dependencies required.
+- Software/dependencies required.
   - Node.js
   - React
   - Spotify API
