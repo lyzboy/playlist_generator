@@ -33,9 +33,9 @@ The running project can be found [here](https://spotimix.netlify.app/).
 ### Prerequisites
 
 - List the software/dependencies required.
-  - Node.js version X.X.X or above
-  - Database system (e.g., PostgreSQL, MongoDB)
-  - Other tools
+  - Node.js
+  - React
+  - Spotify API
 
 ### Steps
 
