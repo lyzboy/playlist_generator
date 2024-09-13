@@ -1,7 +1,7 @@
 import { generateCodeChallenge, generateCodeVerifier } from "./pkce";
 
-//var redirect_uri = "https://spotimix.netlify.app/";
-var redirect_uri = "http://localhost:3000/";
+var redirect_uri = "https://spotimix.netlify.app/";
+//var redirect_uri = "http://localhost:3000/";
 
 const Spotify = {};
 
