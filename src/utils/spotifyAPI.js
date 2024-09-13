@@ -39,7 +39,6 @@ Spotify.verifyAuthentication = async () => {
 Spotify.redirectToAuthCodeFlow = async () => {
     try {
 
-            console.log("get auth code");
             const verifier = generateCodeVerifier(128);
             const challenge = await generateCodeChallenge(verifier);
 
@@ -126,7 +125,6 @@ Spotify.getAccessToken = async (code) => {
             return access_token;
         } else {
             console.log(`There was an issue: ${result.status}`);
-            this.redirectToAuthCodeFlow();
         }
     } catch (error) {
         console.log(`Unable to get access token: ${error}`);

@@ -1,23 +1,129 @@
-# Jamming
 
-This was a project created for a codecademy project. In order to use it on your local enviornment, you will need to sign up for a spotify developer account and create a new app in the dashboard. Once you have recieved a client-id, be sure to create and .env file in you root folder of the app and add the line:
+# Project Title
 
-REACT_APP_CLIENT_ID={YOUR CLIENT ID HERE}
+**Project Title Here**  
+This is a server-less SPA that allows users to search for songs and create a custom playlist that can be saved to their Spotify account. It is built using React and the Spotify API and use CI/CD to deploy to Netlify.
 
-## Features:
+The running project can be found [here](https://spotimix.netlify.app/).
 
--   Users can search for songs by song title.
-    -   You can also include functionality to search by other attributes like artist’s name, genre, etc.
--   Users can see information about each song like title, artist, and album for songs they queried
-    -   You can also include other information – the design is up to you
--   Users can export their custom playlist to their personal Spotify account
+[![License](https://img.shields.io/github/license/lyzboy/playlist_generator.svg)](LICENSE)
+[![Build Status](https://img.shields.io/github/workflow/status/lyzboy/playlist_generator/CI)](
+
+[![Repo Size](https://img.shields.io/github/repo-size/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator)
+[![Contributors](https://img.shields.io/github/contributors/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator/graphs/contributors)
+
+---
+
+## Table of Contents
+
+- [About](#about)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## About
+
+> Brief overview of the project, what problems it solves, and its intended use.  
+Example: "This project aims to create a **modern eCommerce platform** that offers seamless integration with payment processors."
+
+---
 
 ## Installation
 
-To install this project. Run:
+### Prerequisites
 
-`npm install`
+- List the software/dependencies required.
+  - Node.js version X.X.X or above
+  - Database system (e.g., PostgreSQL, MongoDB)
+  - Other tools
 
-Once the node modules are installed, you can run the project with:
+### Steps
 
-`npm start`
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/lyzboy/playlist_generator.git
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**:
+   Copy the `.env.example` file and rename it to `.env`. Then configure the following environment variables:
+
+   *Using bash:*
+   ```bash
+   cp .env.example .env
+   ```
+
+   - `REACT_APP_CLIENT_ID` - Your Spotify client ID found within your Spotify Developer Dashboard.
+
+4. **Run the project**:
+   ```bash
+   npm start
+   ```
+
+---
+
+## Usage
+
+ 
+To run the project, use the following command from the root folder:
+```bash
+npm start
+```
+
+To run the project's tests, use the following command from the root folder:
+```bash
+npm test
+```
+
+You can access the app by visiting `http://localhost:3000` in your browser.
+
+---
+
+## Features
+
+- Users can serch for songs by song title or artist.
+- Users can see information about each song.
+- Users can play a preview of each song if available.
+
+---
+
+
+## Contributing
+
+Contributions are always welcome!  
+
+### How to Contribute
+
+1. **Fork the repository**
+2. **Create a branch for your feature**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Commit your changes**:
+   ```bash
+   git commit -m "Add feature details"
+   ```
+4. **Push to your branch**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Open a Pull Request**
+
+---
+
+## License
+
+Distributed under the **MIT License**.
+
+---
+
