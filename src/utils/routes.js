@@ -43,18 +43,18 @@ routes.search = async (term) => {
 routes.handleCreateNewPlaylist = async (tracks, playlistName)=> {
   try {
       const token = await Spotify.getToken();
-      const playlistObject = await Spotify.generatePlaylistData(
+      const playlistObject = await routes.generatePlaylistData(
           tracks,
           playlistName
       );
-      const userId = await Spotify.getUserId(token);
-      const playlistId = await Spotify.createNewPlaylist(
+      const userId = await routes.getUserId(token);
+      const playlistId = await routes.createNewPlaylist(
           token,
           userId,
           playlistObject.name
       );
 
-      await this.addTracksToPlaylist(
+      await routes.addTracksToPlaylist(
           token,
           playlistId,
           playlistObject.trackURIs
@@ -73,7 +73,7 @@ routes.generatePlaylistData = async (tracks, playlistName) => {
   return { name: playlistName, trackURIs: trackURIs };
 }
 
-async function createNewPlaylist(userToken, userId, playlistName) {
+routes.createNewPlaylist = async (userToken, userId, playlistName) =>{
   const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
   const response = await fetch(endpoint, {
       method: "POST",

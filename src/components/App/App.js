@@ -79,7 +79,7 @@ function App() {
     const handleSavePlaylist = async () => {
         try {
             if (playlist.length > 0) {
-                await Spotify.handleCreateNewPlaylist(playlist, playlistName);
+                await routes.handleCreateNewPlaylist(playlist, playlistName);
                 setPlaylist([]);
                 setPlaylistCreated(true);
                 setSearchResults([]);
