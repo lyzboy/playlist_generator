@@ -24,7 +24,7 @@ The running project can be found [here](https://spotimix.netlify.app/).
 
 ## About
 
-> This project has been developed as a portfoli project to showcase the creation of an react app utilizing API authentication.
+> This project has been developed as a portfolio project to showcase the creation of a react app utilizing API authentication.
 
 ---
 
