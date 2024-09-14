@@ -1,9 +1,10 @@
 import { generateCodeChallenge, generateCodeVerifier } from "./pkce";
 
-//var redirect_uri = "https://spotimix.netlify.app/";
-var redirect_uri = "http://localhost:3000/";
 
 const Spotify = {};
+
+//Spotify.redirect_uri = "https://spotimix.netlify.app/";
+Spotify.redirect_uri = "http://localhost:3000/";
 
 Spotify.getToken= async () =>{
     return localStorage.getItem("access_token");
@@ -47,10 +48,10 @@ Spotify.redirectToAuthCodeFlow = async () => {
             const params = new URLSearchParams();
             params.append("client_id", process.env.REACT_APP_CLIENT_ID);
             params.append("response_type", "code");
-            params.append("redirect_uri", redirect_uri);
+            params.append("redirect_uri", Spotify.redirect_uri);
             params.append(
                 "scope",
-                "user-read-private user-read-email playlist-modify-public"
+                "user-read-private playlist-modify-public"
             );
             params.append("code_challenge_method", "S256");
             params.append("code_challenge", challenge);
@@ -97,7 +98,7 @@ Spotify.getAccessToken = async (code) => {
         params.append("client_id", process.env.REACT_APP_CLIENT_ID);
         params.append("grant_type", "authorization_code");
         params.append("code", code);
-        params.append("redirect_uri", redirect_uri);
+        params.append("redirect_uri", Spotify.redirect_uri);
         params.append("code_verifier", verifier);
 
         // make the POST request for the access token to the correct endpoint
@@ -114,13 +115,9 @@ Spotify.getAccessToken = async (code) => {
         if(result.ok){
             const data = await result.json();
             console.log(data);
-            const { access_token, refresh_token, expires_in } =
+            const { access_token, refresh_token} =
                 data;
             localStorage.setItem("refresh_token", refresh_token);
-
-            // Calculate the expiration time and store it in localStorage
-            const expireTime = new Date().getTime() + Number(expires_in) * 1000;
-            localStorage.setItem("expireTime", expireTime.toString());
 
             return access_token;
         } else {

@@ -11,6 +11,8 @@ import Spotify from "../../utils/spotifyAPI";
 import routes from "../../utils/routes";
 import ProfileHeader from "../ProfileHeader/ProfileHeader";
 
+import { UserProfileContext } from "../../contexts/UserProfileContext";
+
 const PlayPreviewContext = createContext(null);
 const PlayingTrackContext = createContext(null);
 
@@ -21,6 +23,7 @@ function App() {
     const [playlistName, setPlaylistName] = useState("New Playlist");
     const [currentTrackPlaying, setCurrentTrackPlaying] = useState(null);
     const [playlistCreated, setPlaylistCreated] = useState(false);
+    const [userData, setUserData] = useState(null);
     const audio = useRef(null);
 
     useEffect(() => {
@@ -33,7 +36,13 @@ function App() {
     }, [currentTrackPlaying]);
 
     useEffect(() => {
-        //Spotify.verifyAuthentication();
+        const fetchData = async () => {
+            await Spotify.verifyAuthentication();
+            const accessToken = localStorage.getItem("access_token");
+            const userData = await routes.fetchProfile(accessToken);
+            setUserData(userData);
+        };
+        fetchData();
     }, []);
 
     const stopAllAudio = () => {
@@ -111,10 +120,11 @@ function App() {
     return (
         <PlayPreviewContext.Provider value={handlePlayPreview}>
             <PlayingTrackContext.Provider value={currentTrackPlaying}>
+                    <UserProfileContext.Provider value={{userData, setUserData}}>
                 <div className="App">
-
                         <ProfileHeader />
-                        <h1 id="title">Spotimix</h1>
+                    
+                    <h1 id="title">Spotimix</h1>
 
                     <SearchBar
                         setSearchValue={setSearchValue}
@@ -153,6 +163,7 @@ function App() {
                         />
                     </div>
                 </div>
+                </UserProfileContext.Provider>
             </PlayingTrackContext.Provider>
         </PlayPreviewContext.Provider>
     );
