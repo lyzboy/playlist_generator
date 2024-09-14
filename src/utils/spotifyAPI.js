@@ -3,8 +3,8 @@ import { generateCodeChallenge, generateCodeVerifier } from "./pkce";
 
 const Spotify = {};
 
-//Spotify.redirect_uri = "https://spotimix.netlify.app/";
-Spotify.redirect_uri = "http://localhost:3000/";
+Spotify.redirect_uri = "https://spotimix.netlify.app/";
+//Spotify.redirect_uri = "http://localhost:3000/";
 
 Spotify.getToken= async () =>{
     return localStorage.getItem("access_token");
