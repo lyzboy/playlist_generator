@@ -22,14 +22,13 @@ const ProfileHeader = () => {
                   <img alt="profile image" src={profileUrl} />
               )}
           </div>
-          <div className="info">
-              {userName !== "Log in" && (
+          <div className={styles.info}>
+              {/* {userName !== "Log in" && ( */}
                   <>
                       <p>{userName}</p>
-
                       <button>logout</button>
                   </>
-              )}
+              {/* )} */}
           </div>
       </div>
   );
