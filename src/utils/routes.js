@@ -145,7 +145,7 @@ routes.fetchProfile = async (token) => {
   });
   if (response.ok) {
       const result = await response.json();
-      return await result.json();
+      return result;
   } else {
       throw new Error(
           `Get User ID: Status ${response.status}: ${response.message}`

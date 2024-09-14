@@ -90,6 +90,7 @@ You can access the app by visiting `http://localhost:3000` in your browser.
 - Users can serch for songs by song title or artist.
 - Users can see information about each song.
 - Users can play a preview of each song if available.
+- Users can view basic profile information and logout.
 
 ---
 

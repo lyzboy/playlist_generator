@@ -1,0 +1,46 @@
+.profileHeader{
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  border-radius: 5px;
+  border: none;
+  height: 2.6rem;
+  padding: 4px;
+  margin: 2rem 0;
+  min-width: 8rem;
+  max-width: 30rem;
+  background-color: #5928df;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: #7346f0;
+}
+
+button:active {
+  background-color: #3e2486;
+}
+
+
+.info p {
+    color: white;
+    font-weight: bold;
+    font-size: 1.6rem;
+    text-align: left;
+}
+
+.imgContainer {
+  margin-right: 2rem;
+
+  img {
+  border-radius: 50%;
+  }
+}
