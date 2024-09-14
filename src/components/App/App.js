@@ -9,6 +9,7 @@ import styles from "./App.module.css";
 import Spotify from "../../utils/spotifyAPI";
 
 import routes from "../../utils/routes";
+import ProfileHeader from "../ProfileHeader/ProfileHeader";
 
 const PlayPreviewContext = createContext(null);
 const PlayingTrackContext = createContext(null);
@@ -32,7 +33,7 @@ function App() {
     }, [currentTrackPlaying]);
 
     useEffect(() => {
-        Spotify.verifyAuthentication();
+        //Spotify.verifyAuthentication();
     }, []);
 
     const stopAllAudio = () => {
@@ -111,7 +112,10 @@ function App() {
         <PlayPreviewContext.Provider value={handlePlayPreview}>
             <PlayingTrackContext.Provider value={currentTrackPlaying}>
                 <div className="App">
-                    <h1 id="title">Spotimix</h1>
+
+                        <ProfileHeader />
+                        <h1 id="title">Spotimix</h1>
+
                     <SearchBar
                         setSearchValue={setSearchValue}
                         handleSearch={handleSearch}
