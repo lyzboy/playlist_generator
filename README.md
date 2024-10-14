@@ -4,7 +4,7 @@
 **Spotimix**  
 This is a server-less SPA that allows users to search for songs and create a custom playlist that can be saved to their Spotify account. It is built using React and the Spotify API and use CI/CD to deploy to Netlify.
 
-The running project can be found [here](https://spotimix.netlify.app/).
+The running project can be found [here](https://spotimix.netlify.app/). Please be aware that this project is in **'development mode'**. In order to have full functionality within the live environment, your email **must** be added to the approved list of beta users. In order to have your name added to the approved beta users, please contact me.
 
 [![Repo Size](https://img.shields.io/github/repo-size/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator)
 [![Contributors](https://img.shields.io/github/contributors/lyzboy/playlist_generator.svg)](https://github.com/lyzboy/playlist_generator/graphs/contributors)
